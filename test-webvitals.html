@@ -13,9 +13,15 @@
       }
       document.head.appendChild(script);
     }())
+      
+      function clicked() {
+        document.getElementById('foo').innerHTML = '<ol><li>You clicked the button!</li></ol>';
+      }
     </script>
   </head>
   <body>
     Hi there
+    <div id="foo"></div>
+    <button onClick="clicked()">Click Me</button>
     </body>
 </html>
