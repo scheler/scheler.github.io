@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Tracing Architecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <h1>Distributed Tracing Architecture</h1>
+    <p>This diagram illustrates a distributed tracing architecture involving three interconnected services (Service A, Service B, and Service C) and an external Observability Backend. The purpose of this architecture is to track and monitor requests as they traverse through the system, enabling comprehensive visibility into the flow of operations across distributed systems.</p>
+    <div class="mermaid">
+        graph TD;
+            subgraph "Your Services"
+                A["Service A"] -->|traceparent: 00-t1-s1-01| B["Service B"];
+                B -->|traceparent: 00-t1-s2-01| C["Service C"];
+            end
+
+            subgraph "Observability Backend"
+                E["Observability Backend"];
+            end
+
+            A -->|Span trace-id: t1 <br> parent-id: null <br> span-id: s1| E;
+            B -->|Span trace-id: t1 <br> parent-id: s1 <br> span-id: s2| E;
+            C -->|Span trace-id: t1 <br> parent-id: s2 <br> span-id: s3| E;
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            mermaid.initialize({ startOnLoad: true });
+        });
+    </script>
+</body>
+</html>
